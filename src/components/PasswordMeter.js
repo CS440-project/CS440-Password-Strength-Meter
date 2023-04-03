@@ -1,7 +1,9 @@
 import { useState } from "react";
+import zxcvbn from "zxcvbn";
+import Detail from "./Detail";
+import Seq from "./Seq";
 
-
-export default function PasswordMeter() {
+export default function PasswordStrength() {
     const [visibility, setVisibility] = useState("password")
     const [input, setInput] = useState("")
     const [passwordError, setPasswordErr] = useState("Password is Empty");
@@ -30,7 +32,7 @@ export default function PasswordMeter() {
         const weakPassword = weakRegExp.test(passwordValue);
         const strongPassword = strongRegExp.test(passwordValue);
         const whiteSpace = whitespaceRegExp.test(passwordValue);
-
+        
         if (passwordValue === '') {
             setPasswordErr("Password is Empty");
             setPasswordStrengthLevel("empty")
@@ -83,6 +85,23 @@ export default function PasswordMeter() {
                 {passwordStrengthLevel === "strong"  ? <div className="bg-green-600 h-2.5 rounded-full dark:bg-green-500" style={{ width: "100%" }}></div> : ''}
             </div>
             <p> {passwordError}</p>
+            <Detail 
+                passwordValue={input}
+                score={zxcvbn(input).score}
+                guesses={zxcvbn(input).guesses}
+                crack_times={zxcvbn(input).crack_times_display.offline_slow_hashing_1e4_per_second}
+                suggestions={zxcvbn(input).feedback.suggestions}
+                warning={zxcvbn(input).feedback.warning}
+            />
+            {
+                zxcvbn(input).sequence.map((sequence, index)=> {
+                    return (
+                    <Seq key={index} sequence={sequence} />
+                );
+                })
+            }
+            
+           
         </form>);
 
 }
