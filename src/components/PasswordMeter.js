@@ -11,7 +11,8 @@ export default function PasswordStrength() {
     const [password, setPassword] = useState("")
     const [passwordError, setPasswordErr] = useState("Password is Empty");
     const [passwordStrengthLevel, setPasswordStrengthLevel] = useState("empty")
-    const [hps, setHps] = useState(10000)
+    const [hps, setHps] = useState(0)
+    const [gpuCount, setGPUCount] = useState(1)
 
 
     function toggleVisibiliy() {
@@ -26,7 +27,7 @@ export default function PasswordStrength() {
         setPassword(e.target.value)
     }
 
-    const gpuMap = { "RTX 2080": 37085000000, "RTX 3090": 69379700000, "8 x RTX 3090s": 555000000000, "8 x A100s": 523500000000 }
+    const gpuMap = { "RTX 2080": 37085000000, "RTX 3090": 69379700000, "A100s": 65437500000 }
 
     const passwordStrength = (evnt) => {
         const passwordValue = evnt.target.value;
@@ -124,21 +125,24 @@ export default function PasswordStrength() {
                 <label className="font-medium block mb-1 mt-6 text-secondary" for="password">
                     GPU
                 </label>
-                <select id="countries" class="appearance-none border-2 rounded w-full py-3 px-3 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 font-mono js-password" onChange={(e) => {
+                <select id="gpu" class="appearance-none border-2 rounded w-full py-3 px-3 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 font-mono js-password" onChange={(e) => {
                     setHps(gpuMap[e.target.value]);
                 }}>
                     <option selected>Choose a GPU</option>
                     <option value="RTX 2080">RTX 2080</option>
                     <option value="RTX 3090">RTX 3090</option>
-                    <option value="8 x RTX 3090">8 x RTX 3090</option>
-                    <option value="8 x A100s">8 x A100s</option>
+                    <option value="A100s">A100s</option>
                 </select>
-                <div className="w-full bg-gray-4000 rounded-full h-2.5 mb-4 dark:bg-gray-700 my-0.5">
-                    {passwordStrengthLevel === "poor" ? <div className="bg-red-600 h-2.5 rounded-full dark:bg-red-500" style={{ width: 100 / 3 + "%" }}></div> : ''}
-                    {passwordStrengthLevel === "weak" ? <div className="bg-yellow-400 h-2.5 rounded-full" style={{ width: 100 / 3 * 2 + "%" }}></div> : ''}
-                    {passwordStrengthLevel === "strong" ? <div className="bg-green-600 h-2.5 rounded-full dark:bg-green-500" style={{ width: "100%" }}></div> : ''}
-                </div>
-                <div className="text-red-600 font-bold"> {passwordError}</div>
+                <label className="font-medium block mb-1 mt-6 text-secondary" for="password">
+                    GPU Count
+                </label>
+                <input
+                    className="appearance-none border-2 rounded w-full py-3 px-3 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 font-mono js-password"
+                    id="lastName"
+                    type="show"
+                    value={gpuCount}
+                    onChange={(event) => setGPUCount(event.target.value)}
+                />
 
 
 
@@ -151,6 +155,7 @@ export default function PasswordStrength() {
                 suggestions={zxcvbn(password).feedback.suggestions}
                 warning={zxcvbn(password).feedback.warning}
                 hps={hps}
+                gpuCount={gpuCount}
                 className="grow-0 max-w-md shrink-0"
             />
             <div className="flex flex-row flex-wrap gap-0.5 max-w-lg">
