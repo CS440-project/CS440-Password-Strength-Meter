@@ -8,7 +8,7 @@ const getColor = score => {
     } else if (score === 3) {
       return "bg-green-400"
     } else {
-      return "bg-secondary"
+      return "bg-blue-400"
     }
   }
   

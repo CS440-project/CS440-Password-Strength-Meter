@@ -63,21 +63,21 @@ const Entropy = props => {
   const { passwordValue } = props
   return (
     <div className="flex flex-col gap-y-4">
-      <div>
+      <div className="text-secondary">
         Guesses:{" "}
-        <span className="ml-1 text-gray-300 font-poppins-regular">
+        <span className="ml-1 text-gray-300">
           {calculateCharacterPools(passwordValue)}
           <sup>{passwordValue.length}</sup> = {calculateGuesses(passwordValue)}
         </span>
       </div>
       <div>
-        <span className="text-gray-300 font-poppins-regular">
+        <span className="font-poppins-regular text-gray-300">
           E = log<sub>2</sub>
           {calculateCharacterPools(passwordValue)}
           <sup>{passwordValue.length}</sup> = {calculateEntropy(passwordValue)}
         </span>
       </div>
-      <div>
+      <div className="text-secondary">
         Password Strength:
         <span className="text-gray-300 font-poppins-regular">
           {passwordValue ? <PasswordStrength score={calculateScore(passwordValue)} /> : "-"}
