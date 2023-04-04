@@ -42,7 +42,7 @@ const Seq = props => {
             leaveTo="opacity-0 translate-y-1"
           >
             <Popover.Panel
-              className="z-10 bg-primary absolute w-full flex flex-wrap text-sm mt-3 transform px-0 rounded-md border-2 border-secondary"
+              className="z-10 bg-slate-600 absolute w-full flex flex-wrap text-sm mt-3 transform px-0 rounded-md border-2 border-secondary text-slate-50"
               onMouseEnter={() => setIsShowing(true)}
               onMouseLeave={() => setIsShowing(false)}
             >

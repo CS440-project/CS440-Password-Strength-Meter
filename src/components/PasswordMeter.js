@@ -4,7 +4,7 @@ import Detail from "./Detail";
 import Seq from "./Seq";
 
 export default function PasswordStrength() {
-    const [visibility, setVisibility] = useState("password")
+    const [visibility, setVisibility] = useState("text")
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
     const [dateOfBirth, setDateOfBirth] = useState("")
@@ -35,7 +35,7 @@ export default function PasswordStrength() {
         const weakPassword = weakRegExp.test(passwordValue);
         const strongPassword = strongRegExp.test(passwordValue);
         const whiteSpace = whitespaceRegExp.test(passwordValue);
-        
+
         if (passwordValue === '') {
             setPasswordErr("Password is Empty");
             setPasswordStrengthLevel("empty")
@@ -55,7 +55,7 @@ export default function PasswordStrength() {
                 setPasswordStrengthLevel("weak");
                 setPasswordErr("Password is Weak");
 
-            } 
+            }
             // to check strong Password
             if (passwordLength >= 6 && (poorPassword && weakPassword) && strongPassword) {
                 setPasswordStrengthLevel("strong");
@@ -69,77 +69,82 @@ export default function PasswordStrength() {
 
 
     return (
-        <div className="p-4 max-w-md mx-auto" style={{ textAlign: "left" }}>
-        <form className="p-4 max-w-md mx-auto">
-            <label className="font-medium block mb-1 mt-6 text-secondary" for="password">
-                First Name
-            </label>
-            <input
-                className="appearance-none border-2 rounded w-full py-3 px-3 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 font-mono js-password"
-                id="firstName"
-                type="show"
-                value={firstName}
-                onChange={(event) => setFirstName(event.target.value)}
-                onInput={passwordStrength}
-                />
-                            <label className="font-medium block mb-1 mt-6 text-secondary" for="password">
-                Last Name
-            </label>
-            <input
-                className="appearance-none border-2 rounded w-full py-3 px-3 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 font-mono js-password"
-                id="lastName"
-                type="show"
-                value={lastName}
-                onChange={(event) => setLastName(event.target.value)}
-                onInput={passwordStrength}
+        <div className="p-4 mx-mdf flex gap-8" style={{ textAlign: "left" }}>
+            <form className="p-4 max-w-md mx-auto grow-0">
+                <label className="font-medium block mb-1 mt-6 text-secondary" for="password">
+                    First Name
+                </label>
+                <input
+                    className="appearance-none border-2 rounded w-full py-3 px-3 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 font-mono js-password"
+                    id="firstName"
+                    type="show"
+                    value={firstName}
+                    onChange={(event) => setFirstName(event.target.value)}
+                    onInput={passwordStrength}
                 />
                 <label className="font-medium block mb-1 mt-6 text-secondary" for="password">
-                Date of Birth
-            </label>
-            <input
-                className="appearance-none border-2 rounded w-full py-3 px-3 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 font-mono js-password"
-                id="dateOfBirth"
-                type="show"
-                placeholder="dd/mm/yyyy"
-                value={dateOfBirth}
-                onChange={(event) => setDateOfBirth(event.target.value)}
-                onInput={passwordStrength}
+                    Last Name
+                </label>
+                <input
+                    className="appearance-none border-2 rounded w-full py-3 px-3 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 font-mono js-password"
+                    id="lastName"
+                    type="show"
+                    value={lastName}
+                    onChange={(event) => setLastName(event.target.value)}
+                    onInput={passwordStrength}
                 />
-            <label className="font-medium block mb-1 mt-6 text-secondary" for="password">
-                Password
-            </label>
-            <div className="relative w-full">
-                <div className="absolute inset-y-0 right-0 flex items-center px-2">
-                    <input className="hidden js-password-toggle" id="toggle" type="checkbox" onClick={() => toggleVisibiliy()} />
-                    <label className="bg-gray-100 hover:bg-gray-400 rounded px-2 py-1 text-sm text-gray-600 font-mono cursor-pointer js-password-label" htmlFor="toggle">{visibility === "password" ? "show" : "hide"}</label>
-                </div>
-                <input className="appearance-none border-2 rounded w-full py-3 px-3 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 font-mono js-password" id="password" type={visibility} value={password} onChange={handleChange} onInput={passwordStrength}
+                <label className="font-medium block mb-1 mt-6 text-secondary" for="password">
+                    Date of Birth
+                </label>
+                <input
+                    className="appearance-none border-2 rounded w-full py-3 px-3 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 font-mono js-password"
+                    id="dateOfBirth"
+                    type="show"
+                    placeholder="dd/mm/yyyy"
+                    value={dateOfBirth}
+                    onChange={(event) => setDateOfBirth(event.target.value)}
+                    onInput={passwordStrength}
                 />
+                <label className="font-medium block mb-1 mt-6 text-secondary" for="password">
+                    Password
+                </label>
+                <div className="relative w-full">
+                    <div className="absolute inset-y-0 right-0 flex items-center px-2">
+                        <input className="hidden js-password-toggle" id="toggle" type="checkbox" onClick={() => toggleVisibiliy()} />
+                        <label className="bg-gray-100 hover:bg-gray-400 rounded px-2 py-1 text-sm text-gray-600 font-mono cursor-pointer js-password-label" htmlFor="toggle">{visibility === "password" ? "show" : "hide"}</label>
+                    </div>
+                    <input className="appearance-none border-2 rounded w-full py-3 px-3 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 font-mono js-password" id="password" type={visibility} value={password} onChange={handleChange} onInput={passwordStrength}
+                    />
 
-            </div>
-            <div className="w-full bg-gray-4000 rounded-full h-2.5 mb-4 dark:bg-gray-700 my-0.5">
-                {passwordStrengthLevel === "poor" ? <div className="bg-red-600 h-2.5 rounded-full dark:bg-red-500" style={{ width: 100/3 + "%" }}></div> : ''}
-                {passwordStrengthLevel === "weak"  ? <div className="bg-yellow-400 h-2.5 rounded-full" style={{ width: 100/3*2+ "%" }}></div> : ''}
-                {passwordStrengthLevel === "strong"  ? <div className="bg-green-600 h-2.5 rounded-full dark:bg-green-500" style={{ width: "100%" }}></div> : ''}
-            </div>
-            <div className="text-red-600 font-bold"> {passwordError}</div>
-            <Detail 
+                </div>
+                <div className="w-full bg-gray-4000 rounded-full h-2.5 mb-4 dark:bg-gray-700 my-0.5">
+                    {passwordStrengthLevel === "poor" ? <div className="bg-red-600 h-2.5 rounded-full dark:bg-red-500" style={{ width: 100 / 3 + "%" }}></div> : ''}
+                    {passwordStrengthLevel === "weak" ? <div className="bg-yellow-400 h-2.5 rounded-full" style={{ width: 100 / 3 * 2 + "%" }}></div> : ''}
+                    {passwordStrengthLevel === "strong" ? <div className="bg-green-600 h-2.5 rounded-full dark:bg-green-500" style={{ width: "100%" }}></div> : ''}
+                </div>
+                <div className="text-red-600 font-bold"> {passwordError}</div>
+
+
+
+            </form>
+            <Detail
                 passwordValue={password}
                 score={zxcvbn(password).score}
                 guesses={zxcvbn(password).guesses}
                 crack_times={zxcvbn(password).crack_times_display.offline_slow_hashing_1e4_per_second}
                 suggestions={zxcvbn(password).feedback.suggestions}
                 warning={zxcvbn(password).feedback.warning}
+                className="grow-0 max-w-md shrink-0"
             />
-            {
-                zxcvbn(password).sequence.map((sequence, index)=> {
-                    return (
-                    <Seq key={index} sequence={sequence} />
-                );
-                })
-            }
-            
-           
-        </form></div>);
+            <div className="flex flex-row flex-wrap gap-0.5 max-w-lg">
+                {
+                    zxcvbn(password).sequence.map((sequence, index) => {
+                        return (
+                            <Seq key={index} sequence={sequence} className="gap-1 flex-grow-0 space-x-0.5" />
+                        );
+                    })
+                }
+            </div>
+        </div>);
 
 }
