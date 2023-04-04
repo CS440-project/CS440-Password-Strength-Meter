@@ -11,6 +11,8 @@ export default function PasswordStrength() {
     const [password, setPassword] = useState("")
     const [passwordError, setPasswordErr] = useState("Password is Empty");
     const [passwordStrengthLevel, setPasswordStrengthLevel] = useState("empty")
+    const [hps, setHps] = useState(10000)
+
 
     function toggleVisibiliy() {
         if (visibility === "password") {
@@ -23,6 +25,8 @@ export default function PasswordStrength() {
     function handleChange(e) {
         setPassword(e.target.value)
     }
+
+    const gpuMap = { "RTX 2080": 37085000000, "RTX 3090": 69379700000, "8 x RTX 3090s": 555000000000, "8 x A100s": 523500000000 }
 
     const passwordStrength = (evnt) => {
         const passwordValue = evnt.target.value;
@@ -117,6 +121,18 @@ export default function PasswordStrength() {
                     />
 
                 </div>
+                <label className="font-medium block mb-1 mt-6 text-secondary" for="password">
+                    GPU
+                </label>
+                <select id="countries" class="appearance-none border-2 rounded w-full py-3 px-3 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 font-mono js-password" onChange={(e) => {
+                    setHps(gpuMap[e.target.value]);
+                }}>
+                    <option selected>Choose a GPU</option>
+                    <option value="RTX 2080">RTX 2080</option>
+                    <option value="RTX 3090">RTX 3090</option>
+                    <option value="8 x RTX 3090">8 x RTX 3090</option>
+                    <option value="8 x A100s">8 x A100s</option>
+                </select>
                 <div className="w-full bg-gray-4000 rounded-full h-2.5 mb-4 dark:bg-gray-700 my-0.5">
                     {passwordStrengthLevel === "poor" ? <div className="bg-red-600 h-2.5 rounded-full dark:bg-red-500" style={{ width: 100 / 3 + "%" }}></div> : ''}
                     {passwordStrengthLevel === "weak" ? <div className="bg-yellow-400 h-2.5 rounded-full" style={{ width: 100 / 3 * 2 + "%" }}></div> : ''}
@@ -134,6 +150,7 @@ export default function PasswordStrength() {
                 crack_times={zxcvbn(password).crack_times_display.offline_slow_hashing_1e4_per_second}
                 suggestions={zxcvbn(password).feedback.suggestions}
                 warning={zxcvbn(password).feedback.warning}
+                hps={hps}
                 className="grow-0 max-w-md shrink-0"
             />
             <div className="flex flex-row flex-wrap gap-0.5 max-w-lg">

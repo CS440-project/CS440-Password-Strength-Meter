@@ -3,7 +3,7 @@ import Entropy from "./Entropy"
 import PasswordStrength from "./PasswordStrength"
 
 const Detail = props => {
-  const { passwordValue, score, guesses, crack_times, suggestions, warning } = props
+  const { passwordValue, score, guesses, crack_times, suggestions, warning, hps } = props
   return (
     <div className="flex flex-col gap-y-6">
       <div className=" font-poppins-semibold opacity-80 bg-gray-500 py-6 px-8 rounded-lg flex flex-col gap-y-4">
@@ -42,6 +42,23 @@ const Detail = props => {
           Password Strength:
           <span className="text-gray-300 font-poppins-regular">
             {passwordValue ? <PasswordStrength score={score} /> : "-"}
+          </span>
+        </div>
+      </div>
+      <div className="text-secondary font-poppins-semibold opacity-80 bg-gray-500 py-6 px-8 rounded-lg flex flex-col gap-y-4">
+        <div className="font-bold text-secondary underline">
+          Time to crack with computational power
+        </div>
+        <div >
+          Guesses:{" "}
+          <span className="ml-1 text-gray-300 font-poppins-regular">
+            {guesses}
+          </span>
+        </div>
+        <div>
+          Time to crack (10,000 guesses per second/with GPU):{" "}
+          <span className="ml-1 text-tertiary font-poppins-regular">
+            {_.capitalize(guesses / hps)}
           </span>
         </div>
       </div>
