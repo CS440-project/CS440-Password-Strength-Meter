@@ -36,7 +36,6 @@ const calculateCharacterPools = passwordValue => {
 const calculateGuesses = passwordValue => {
   const len = passwordValue.length
   const characterPools = calculateCharacterPools(passwordValue)
-
   return Math.pow(characterPools, len)
 }
 
@@ -102,7 +101,7 @@ const Detail = props => {
         <div>
           Time to crack with GPU:{" "}
           <span className="ml-1 text-tertiary font-poppins-regular">
-            {hps===0? "-": (calculateEntropy(passwordValue) / (hps * gpuCount)) <= 1? "Less than a second":(calculateEntropy(passwordValue) / (hps * gpuCount)).toFixed(2)+ " seconds"}
+            {hps===0? "-": (calculateGuesses(passwordValue) / (hps * gpuCount)) <= 1? "Less than a second":(calculateGuesses(passwordValue) / (hps * gpuCount)).toFixed(2)+ " seconds"}
           </span>
         </div>
       </div>
