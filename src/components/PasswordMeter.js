@@ -76,7 +76,7 @@ export default function PasswordStrength() {
     return (
         <div className="p-4 mx-mdf flex gap-8" style={{ textAlign: "left" }}>
             <form className="p-4 max-w-md mx-auto grow-0">
-                <label className="font-medium block mb-1 mt-6 text-secondary" for="password">
+                {/* <label className="font-medium block mb-1 mt-6 text-secondary" for="password">
                     First Name
                 </label>
                 <input
@@ -109,7 +109,7 @@ export default function PasswordStrength() {
                     value={dateOfBirth}
                     onChange={(event) => setDateOfBirth(event.target.value)}
                     onInput={passwordStrength}
-                />
+                /> */}
                 <label className="font-medium block mb-1 mt-6 text-secondary" for="password">
                     Password
                 </label>

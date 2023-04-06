@@ -6,11 +6,11 @@ const Detail = props => {
   const { passwordValue, score, guesses, crack_times, suggestions, warning, hps, gpuCount } = props
   return (
     <div className="flex flex-col gap-y-6">
-      <div className=" font-poppins-semibold opacity-80 bg-gray-500 py-6 px-8 rounded-lg flex flex-col gap-y-4">
+      <div className=" font-poppins-semibold opacity-80 bg-gray-800 py-6 px-8 rounded-lg flex flex-col gap-y-4">
         <div className="font-bold text-secondary underline">Password Entropy</div>
         <Entropy passwordValue={passwordValue} />
       </div>
-      <div className="text-secondary font-poppins-semibold opacity-80 bg-gray-500 py-6 px-8 rounded-lg flex flex-col gap-y-4">
+      <div className="text-secondary font-poppins-semibold opacity-80 bg-gray-800 py-6 px-8 rounded-lg flex flex-col gap-y-4">
         <div className="font-bold text-secondary underline">
           Character Matching
         </div>
@@ -45,7 +45,7 @@ const Detail = props => {
           </span>
         </div>
       </div>
-      <div className="text-secondary font-poppins-semibold opacity-80 bg-gray-500 py-6 px-8 rounded-lg flex flex-col gap-y-4">
+      <div className="text-secondary font-poppins-semibold opacity-80 bg-gray-800 py-6 px-8 rounded-lg flex flex-col gap-y-4">
         <div className="font-bold text-secondary underline">
           Time to crack with computational power
         </div>
