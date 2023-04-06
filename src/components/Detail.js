@@ -2,6 +2,50 @@ import _ from "lodash"
 import Entropy from "./Entropy"
 import PasswordStrength from "./PasswordStrength"
 
+const calculateCharacterPools = passwordValue => {
+  const pools = new Array(4).fill(0)
+  for (const character of passwordValue) {
+    if (character >= "a" && character <= "z") {
+      pools[0] = 1
+    } else if (character >= "A" && character <= "Z") {
+      pools[1] = 1
+    } else if (character >= "0" && character <= "9") {
+      pools[2] = 1
+    } else {
+      pools[3] = 1
+    }
+  }
+
+  let sum = 0
+  if (pools[0] === 1) {
+    sum += 26
+  }
+  if (pools[1] === 1) {
+    sum += 26
+  }
+  if (pools[2] === 1) {
+    sum += 10
+  }
+  if (pools[3] === 1) {
+    sum += 32
+  }
+
+  return sum
+}
+
+const calculateGuesses = passwordValue => {
+  const len = passwordValue.length
+  const characterPools = calculateCharacterPools(passwordValue)
+
+  return Math.pow(characterPools, len)
+}
+
+const calculateEntropy = passwordValue => {
+  const guesses = calculateGuesses(passwordValue)
+
+  return Math.log(guesses) / Math.log(2)
+}
+
 const Detail = props => {
   const { passwordValue, score, guesses, crack_times, suggestions, warning, hps, gpuCount } = props
   return (
@@ -52,13 +96,13 @@ const Detail = props => {
         <div >
           Guesses:{" "}
           <span className="ml-1 text-gray-300 font-poppins-regular">
-            {guesses}
+            {calculateGuesses(passwordValue)}
           </span>
         </div>
         <div>
           Time to crack with GPU:{" "}
           <span className="ml-1 text-tertiary font-poppins-regular">
-            {hps===0? "-": (guesses / (hps * gpuCount)) <= 1? "Less than a second":(guesses / (hps * gpuCount)).toFixed(2)+ " seconds"}
+            {hps===0? "-": (calculateEntropy(passwordValue) / (hps * gpuCount)) <= 1? "Less than a second":(calculateEntropy(passwordValue) / (hps * gpuCount)).toFixed(2)+ " seconds"}
           </span>
         </div>
       </div>
